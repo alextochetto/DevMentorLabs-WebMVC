@@ -1,0 +1,14 @@
+﻿@model LoginViewModel
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.TextBoxFor(_=>_.Email)
+    @Html.ValidationMessageFor(_=>_.Email)
+    @Html.PasswordFor(_=>_.Password)
+    @Html.ValidationMessageFor(_=>_.Password)
+
+    <button type="submit" id="btn-login">Log In</button>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
