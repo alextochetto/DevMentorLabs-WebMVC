@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Web.Contract</AssemblyName>
+    <RootNamespace>Web.Contract</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DTO\Web.DTO\Web.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

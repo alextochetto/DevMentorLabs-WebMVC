@@ -1,0 +1,24 @@
+﻿@model LoginViewModel
+@if (!User.Identity.IsAuthenticated)
+{
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        @Html.TextBoxFor(_=>_.Email)
+        @Html.ValidationMessageFor(_=>_.Email)
+        @Html.PasswordFor(_=>_.Password)
+        @Html.ValidationMessageFor(_=>_.Password)
+
+        <button type="submit" id="btn-login">Log In</button>
+    }
+}
+else
+{
+    @using (Html.BeginForm("Logout", "Account", FormMethod.Get))
+    {
+        <button type="submit" id="btn-login" asp-controller="Account" asp-action="Logout">Log Out</button>
+    }
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
