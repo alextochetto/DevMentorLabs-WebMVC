@@ -1,0 +1,17 @@
+﻿@model WebMVC.Models.UserAddViewModel
+@using (Html.BeginForm("AddUser", "Core", FormMethod.Post))
+{
+    @Html.TextBoxFor(_=>_.Name)
+    @Html.ValidationMessageFor(_=>_.Name)
+    @Html.TextBoxFor(_=>_.Email)
+    @Html.ValidationMessageFor(_=>_.Email)
+    @Html.PasswordFor(_=>_.Password)
+    @Html.ValidationMessageFor(_=>_.Password)
+
+    <button type="submit" id="btn-login">Log In</button>
+}
+
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

@@ -26,6 +26,7 @@ namespace WebMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddWebServices();
+            services.AddCoreServices();
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
