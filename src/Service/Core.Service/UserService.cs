@@ -1,4 +1,5 @@
 ﻿using Core.Contract;
+using Infrastructure.Security;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Core.Service
     {
         public async Task<bool> AddUser(UserAddDTQ userAddQuery)
         {
+            userAddQuery.Password = SaltCryptography.CreatePassword(userAddQuery.Password);
+
             return await Task.FromResult(true);
         }
     }
