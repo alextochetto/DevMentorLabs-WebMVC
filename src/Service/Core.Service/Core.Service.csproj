@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Contract\Core.Contract\Core.Contract.csproj" />
+    <ProjectReference Include="..\..\Contract\Core.RepositoryContract\Core.RepositoryContract.csproj" />
     <ProjectReference Include="..\..\DTO\Web.DTO\Web.DTO.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Security\Infrastructure.Security\Infrastructure.Security.csproj" />
   </ItemGroup>

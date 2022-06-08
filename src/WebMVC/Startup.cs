@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Contract;
+using Core.RepositoryContract;
+using Core.RepositoryService;
+using Core.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +14,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Web.RepositoryContract;
+using Web.RepositoryService;
 
 namespace WebMVC
 {
@@ -25,6 +31,9 @@ namespace WebMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUser, UserService>();
+            services.AddScoped<IUserRepository, UserRepositoryService>();
+            services.AddScoped<IRepository, RepositorySqlServer>();
             services.AddWebServices();
             services.AddCoreServices();
             services.AddControllersWithViews();
