@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contract\Core.RepositoryContract\Core.RepositoryContract.csproj" />
+    <ProjectReference Include="..\..\DTO\Web.DTO\Web.DTO.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Data\Web.RepositoryContract\Web.RepositoryContract.csproj" />
+  </ItemGroup>
+
+</Project>

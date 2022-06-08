@@ -38,6 +38,15 @@ namespace Web.RepositoryService
             }
         }
 
+        public IDbDataParameter CreateParameter(string name, DbType type, object value = null)
+        {
+            SqlParameter parameterSQL = new SqlParameter();
+            parameterSQL.ParameterName = name;
+            parameterSQL.Value = (value == null) ? DBNull.Value : value;
+            parameterSQL.DbType = type;
+            return (parameterSQL);
+        }
+
         private SqlConnection CreateConnectionInternal()
         {
             if (string.IsNullOrEmpty(this._connectionString))
@@ -49,7 +58,7 @@ namespace Web.RepositoryService
 
         public string GetConnectionString()
         {
-            return (_configuration.GetSection("connectionString")).Value;
+            return (_configuration.GetConnectionString("ConnectionString"));
         }
 
         private SqlCommand CreateCommandInternal(string sql, SqlConnection connection)
