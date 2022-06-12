@@ -9,5 +9,6 @@ namespace Core.Contract
     public interface IUser
     {
         Task<bool> AddUser(UserAddDTQ userAddQuery);
+        Task<UserDTO?> GetUser(UserGetDTQ userGetQuery);
     }
 }

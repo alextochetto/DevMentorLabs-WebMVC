@@ -25,5 +25,18 @@ namespace Core.Service
 
             return await Task.FromResult(true);
         }
+
+        public async Task<UserDTO?> GetUser(UserGetDTQ userGetQuery)
+        {
+            UserDTO user = await this._userRepository.Get(userGetQuery);
+            if (user is null)
+                return null;
+
+            bool isValid = SaltCryptography.VerifyPassword(userGetQuery.Password, user.Password);
+            if (!isValid)
+                return null;
+
+            return user;
+        }
     }
 }

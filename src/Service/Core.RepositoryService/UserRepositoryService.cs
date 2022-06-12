@@ -17,6 +17,7 @@ namespace Core.RepositoryService
         }
 
         #region SQL
+        private const string SQL_SELECT_USER_ACTIVE_BY_EMAIL = "SELECT codUser,dscFirstName,dscMiddleName,dscLastName,dscEmail,dscPassword,flgActive FROM I_USER WHERE dscEmail = @dscEmail AND flgActive = 1";
         private const string SQL_INSERT_USER = "INSERT INTO I_USER (dscFirstName,dscMiddleName,dscLastName,dscEmail,dscPassword,flgActive) VALUES (@dscFirstName,@dscMiddleName,@dscLastName,@dscEmail,@dscPassword,@flgActive)";
         #endregion
 
@@ -51,7 +52,7 @@ namespace Core.RepositoryService
         private void AddParameterActive(List<IDbDataParameter> parameters, int flgActive)
         {
             parameters.Add(_repository.CreateParameter(PARM_flgActive, DbType.Int32, flgActive));
-        } 
+        }
         #endregion
 
         public async Task<bool> Add(UserAddDTQ userAddQuery)
@@ -86,6 +87,26 @@ namespace Core.RepositoryService
             await _repository.ExecuteNonQuery(SQL_INSERT_USER, parameters);
 
             return true;
+        }
+
+        public async Task<UserDTO> Get(UserGetDTQ userGetQuery)
+        {
+            UserDTO user = null;
+            List<IDbDataParameter> parameters = new List<IDbDataParameter>();
+            AddParameterEmail(parameters, userGetQuery.Email);
+            IDataReader reader = await _repository.GetReader(SQL_SELECT_USER_ACTIVE_BY_EMAIL, parameters);
+            if (reader.Read())
+            {
+                user = new UserDTO();
+                user.Code = reader.GetInt64(0);
+                user.FirstName = reader.GetString(1);
+                user.MiddleName = reader.GetString(2);
+                user.LastName = reader.GetString(3);
+                user.Email = reader.GetString(4);
+                user.Password = reader.GetString(5);
+                user.Active = reader.GetInt32(6);
+            }
+            return user;
         }
     }
 }

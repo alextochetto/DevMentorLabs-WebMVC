@@ -56,7 +56,26 @@ namespace Web.RepositoryService
             return (connection);
         }
 
-        public string GetConnectionString()
+        public async Task<IDataReader> GetReader(string sql, List<IDbDataParameter> parameters = null)
+        {
+            SqlConnection connection = CreateConnectionInternal();
+            try
+            {
+                using (SqlCommand command = CreateCommandInternal(sql, connection))
+                {
+                    InsertParameters(command, parameters, true);
+                    SqlDataReader reader = await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+                    return (reader);
+                }
+            }
+            catch
+            {
+                connection.Close();
+                throw;
+            }
+        }
+
+        private string GetConnectionString()
         {
             return (_configuration.GetConnectionString("ConnectionString"));
         }

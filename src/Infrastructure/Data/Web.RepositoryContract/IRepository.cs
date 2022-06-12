@@ -8,5 +8,6 @@ namespace Web.RepositoryContract
     {
         IDbDataParameter CreateParameter(string name, DbType type, object value = null);
         Task<long> ExecuteNonQuery(string sql, List<IDbDataParameter> parameters = null);
+        Task<IDataReader> GetReader(string sql, List<IDbDataParameter> parameters = null);
     }
 }

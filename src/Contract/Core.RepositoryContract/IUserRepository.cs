@@ -7,5 +7,6 @@ namespace Core.RepositoryContract
     public interface IUserRepository
     {
         Task<bool> Add(UserAddDTQ userAddQuery);
+        Task<UserDTO> Get(UserGetDTQ userGetQuery);
     }
 }
