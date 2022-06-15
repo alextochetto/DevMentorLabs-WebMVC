@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31402.337
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC", "..\WebMVC\WebMVC.csproj", "{5C9DF5D4-7CD3-41B3-8023-687EE59C3BC8}"
 EndProject
@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.RepositoryContract", ".
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.RepositoryService", "..\Infrastructure\Data\Web.RepositoryService\Web.RepositoryService.csproj", "{1DFE837F-966D-40A0-868A-E9450B7ABB32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.RepositoryService", "..\Service\Core.RepositoryService\Core.RepositoryService.csproj", "{FA3F2956-DFDA-4BB1-9CC3-5649D61112E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.RepositoryService", "..\Service\Core.RepositoryService\Core.RepositoryService.csproj", "{FA3F2956-DFDA-4BB1-9CC3-5649D61112E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.RepositoryContract", "..\Contract\Core.RepositoryContract\Core.RepositoryContract.csproj", "{82E79191-560C-401D-A05B-C0D093DD0606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.RepositoryContract", "..\Contract\Core.RepositoryContract\Core.RepositoryContract.csproj", "{82E79191-560C-401D-A05B-C0D093DD0606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "..\WebAPI\WebAPI.csproj", "{76C3948F-B521-49B8-8523-D8F8F07B2804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{82E79191-560C-401D-A05B-C0D093DD0606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82E79191-560C-401D-A05B-C0D093DD0606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82E79191-560C-401D-A05B-C0D093DD0606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C3948F-B521-49B8-8523-D8F8F07B2804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C3948F-B521-49B8-8523-D8F8F07B2804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C3948F-B521-49B8-8523-D8F8F07B2804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C3948F-B521-49B8-8523-D8F8F07B2804}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

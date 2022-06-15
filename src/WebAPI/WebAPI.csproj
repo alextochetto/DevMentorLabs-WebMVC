@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contract\Core.Contract\Core.Contract.csproj" />
+    <ProjectReference Include="..\Contract\Core.RepositoryContract\Core.RepositoryContract.csproj" />
+    <ProjectReference Include="..\Contract\Web.Contract\Web.Contract.csproj" />
+    <ProjectReference Include="..\DTO\Web.DTO\Web.DTO.csproj" />
+    <ProjectReference Include="..\Infrastructure\Data\Web.RepositoryContract\Web.RepositoryContract.csproj" />
+    <ProjectReference Include="..\Infrastructure\Data\Web.RepositoryService\Web.RepositoryService.csproj" />
+    <ProjectReference Include="..\Service\Core.RepositoryService\Core.RepositoryService.csproj" />
+    <ProjectReference Include="..\Service\Core.Service\Core.Service.csproj" />
+    <ProjectReference Include="..\Service\Web.Service\Web.Service.csproj" />
+  </ItemGroup>
+
+
+</Project>
