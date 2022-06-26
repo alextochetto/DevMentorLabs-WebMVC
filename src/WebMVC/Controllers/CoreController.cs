@@ -46,6 +46,7 @@ namespace WebMVC.Controllers
         {
             //long size = files.Sum(f => f.Length);
 
+            List<string> lines = new List<string>();
             List<string> filePaths = new List<string>();
             foreach (var formFile in files)
             {
@@ -58,21 +59,54 @@ namespace WebMVC.Controllers
                     {
                         await formFile.CopyToAsync(stream);
                     }
-
-                    StringBuilder sb = new StringBuilder();
                     using (StreamReader sr = new StreamReader(filePath, Encoding.UTF8, true))
                     {
                         string line;
                         // Read and display lines from the file until the end of 
                         // the file is reached.
+                        int i = 0; // jump line 1
                         while ((line = sr.ReadLine()) != null)
                         {
-                            sb.AppendLine(line);
+                            if (i == 0)
+                            {
+                                i++;
+                                continue;
+                            }
+                            i++;
+                            lines.Add(line);
                         }
                     }
-                    string allines = sb.ToString();
                 }
             }
+
+            List<ProcedimentoDTO> procedimentos = new List<ProcedimentoDTO>();
+            ProcedimentoDTO procedimento;
+            for (int i = 0; i < lines.Count; i++)
+            {
+                string line = lines[i].ToString();
+                string[] parts = line.Split(';');
+                if (parts.Length == 1)
+                    continue;
+                procedimento = new ProcedimentoDTO();
+                procedimento.Procedimento = parts[0];
+                procedimento.SubGrupo = parts[1];
+                procedimento.Grupo = parts[1];
+                procedimento.Capitulo = parts[2];
+                procedimentos.Add(procedimento);
+            }
+
+            //PROCEDIMENTO - ROL 2018
+            //SUBGRUPO - ROL 2018
+            //GRUPO - ROL 2018
+            //CAPÍTULO - ROL 2018
+            //OD
+            //AMB
+            //HCO
+            //HSO
+            //REF
+            //PAC
+            //DUT
+
             // process uploaded files
             // Don't rely on or trust the FileName property without validation.
             return Ok(new { count = files.Count, filePaths });
