@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Web.DTO.Core;
@@ -48,6 +49,20 @@ namespace WebMVC.Controllers
 
             List<string> lines = new List<string>();
             List<string> filePaths = new List<string>();
+            await UploadArquivos(files, lines, filePaths);
+
+            List<ProcedimentoDTO> procedimentos = new List<ProcedimentoDTO>();
+            ListarProcedimentos(lines, procedimentos);
+            List<ProcedimentoSubGrupoHierarquiaDTO> procedimentosSubGrupoHierarquia = CriarHierarquia(procedimentos);
+
+            // process uploaded files
+            // Don't rely on or trust the FileName property without validation.
+            //return Ok(new { count = files.Count, filePaths });
+            return Ok(new { procedimentosSubGrupoHierarquia });
+        }
+
+        private static async Task UploadArquivos(List<IFormFile> files, List<string> lines, List<string> filePaths)
+        {
             foreach (var formFile in files)
             {
                 if (formFile.Length > 0)
@@ -76,10 +91,13 @@ namespace WebMVC.Controllers
                             lines.Add(line);
                         }
                     }
+                    System.IO.File.Delete(filePath);
                 }
             }
+        }
 
-            List<ProcedimentoDTO> procedimentos = new List<ProcedimentoDTO>();
+        private static void ListarProcedimentos(List<string> lines, List<ProcedimentoDTO> procedimentos)
+        {
             ProcedimentoDTO procedimento;
             for (int i = 0; i < lines.Count; i++)
             {
@@ -106,10 +124,29 @@ namespace WebMVC.Controllers
             //REF
             //PAC
             //DUT
+        }
 
-            // process uploaded files
-            // Don't rely on or trust the FileName property without validation.
-            return Ok(new { count = files.Count, filePaths });
+        private static List<ProcedimentoSubGrupoHierarquiaDTO> CriarHierarquia(List<ProcedimentoDTO> procedimentos)
+        {
+            List<ProcedimentoSubGrupoHierarquiaDTO> procedimentosSubGrupoHierarquia = new List<ProcedimentoSubGrupoHierarquiaDTO>();
+            List<string> subGruposDistintos = procedimentos.Select(_ => _.SubGrupo).Distinct().ToList();
+
+            List<ProcedimentoDTO> procedimentosOrdenadosSubGrupo;
+            ProcedimentoSubGrupoHierarquiaDTO procedimentoSubGrupoHierarquia;
+            foreach (string subGrupo in subGruposDistintos)
+            {
+                procedimentoSubGrupoHierarquia = new ProcedimentoSubGrupoHierarquiaDTO();
+                procedimentoSubGrupoHierarquia.SubGrupo = subGrupo;
+                procedimentoSubGrupoHierarquia.Procedimentos = new List<ProcedimentoDTO>();
+                procedimentosOrdenadosSubGrupo = procedimentos.Where(_ => _.SubGrupo == subGrupo).ToList();
+                foreach (ProcedimentoDTO procedimento in procedimentosOrdenadosSubGrupo)
+                {
+                    procedimentoSubGrupoHierarquia.Procedimentos.Add(procedimento);
+                }
+                procedimentosSubGrupoHierarquia.Add(procedimentoSubGrupoHierarquia);
+            }
+
+            return procedimentosSubGrupoHierarquia;
         }
     }
 }
